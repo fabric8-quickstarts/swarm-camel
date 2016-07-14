@@ -25,6 +25,7 @@ import static org.apache.camel.model.rest.RestParamType.path;
 @ApplicationScoped
 @ContextName("rest-context")
 public class RestService extends RouteBuilder {
+
     @Override public void configure() throws Exception {
 
         restConfiguration().component("undertow")
