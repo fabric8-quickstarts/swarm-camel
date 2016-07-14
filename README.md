@@ -2,21 +2,31 @@
 
 ## Introduction
 
-This quickstart uses WildFly Swarm as Java lightweight container and the Apache Camel Integration Framework to expose a RESTfull endpoint registered within the Undertow server.
+This quickstart uses WildFly Swarm as Java container and the Apache Camel Integration Framework to expose a RESTfull endpoint registered within the Undertow server.
 This example uses the REST fluent DSL to define a service which provides one operation
 
 - GET api/say/{id}       - Say Hello to the user name
 
-To package the Camel module within the Swarm container, we use a [fraction]() which is customized with the RouteBuilder class containing the Route.
-The MainApp class is bootstrapped by the Swarm container when we launch it.
+The Camel modules deployed within the WildFly Swarm container are defined within the pom.xml definition file.
+To configure jolokia, we use a [fraction]() which is customized with the path to access the resource.
+
+The static resources (index.html file) like also the package containing the Camel route are defined within the WAR Archive which is created using ShrinkWrap and deployed after the Container has been started. 
+
+The Camel context is created using the CDI Weld Container which is reponsible to scan the classes to discover the @ApplicationScope annotation like also the the @CamelContext annotation which is managed as a cdi extension.
+
+The MainApp class is bootstrapped by the WildFly Swarm container when we launch it.
 
 ```
 public static void main(String[] args) throws Exception {
-	Swarm swarm = new Swarm();
+	Container container = new Container();
+    container.fraction(new JolokiaFraction("/jmx"));
+    container.start();
 
-	// Camel Fraction
-	swarm.fraction(new CamelCoreFraction()
-	        .addRouteBuilder(new RestService()));
+    WARArchive deployment = ShrinkWrap.create(WARArchive.class);
+    deployment.addPackage("io.fabric8.quickstarts.swarm.route");
+    deployment.staticContent();
+
+    container.deploy(deployment);
 ```
 
 ## Build
