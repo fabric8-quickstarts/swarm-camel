@@ -127,7 +127,6 @@
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
-
             <!-- Swarm -->
             <plugin>
                 <groupId>org.wildfly.swarm</groupId>
@@ -145,7 +144,6 @@
                     <mainClass>io.fabric8.quickstarts.swarm.MainApp</mainClass>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>

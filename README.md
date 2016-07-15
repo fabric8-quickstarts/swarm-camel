@@ -2,21 +2,34 @@
 
 ## Introduction
 
-This quickstart uses WildFly Swarm as Java lightweight container and the Apache Camel Integration Framework to expose a RESTfull endpoint registered within the Undertow server.
+This quickstart uses WildFly Swarm as Java container and the Apache Camel Integration Framework to expose a RESTfull endpoint registered within the Undertow server.
 This example uses the REST fluent DSL to define a service which provides one operation
 
 - GET api/say/{id}       - Say Hello to the user name
 
-To package the Camel module within the Swarm container, we use a [fraction]() which is customized with the RouteBuilder class containing the Route.
-The MainApp class is bootstrapped by the Swarm container when we launch it.
+The Camel modules deployed within the WildFly Swarm container are defined within the pom.xml definition file. To expose the JMX MBeans using a HTTP endpoint, we have also
+packaged to this quickstart project, the [jolokia](https://jolokia.org/reference/html/protocol.html) technology which allows to query your MBeans using JSon over HTTP.
+
+To configure jolokia, we must declare a Wildfly [fraction](https://wildfly-swarm.gitbooks.io/wildfly-swarm-users-guide/content/v/6a00bb344527303f784f541ee2fb93abec4a1ef4/fraction_authoring.html) which is the composable piece of the platform
+in order to deploy and customize the module (example: to define the URL path to access the Jolokia JMX resource).
+
+The static resources (index.html file containing the link to the swagger.json doc file) like also the package containing the Camel route are defined within the WAR Archive which is created using ShrinkWrap and deployed after the Container has been started. 
+
+The Camel context is created using the CDI Weld Container which is reponsible to scan the classes to discover the @ApplicationScope annotation like also the the @CamelContext annotation which is managed as a cdi extension.
+
+The MainApp class is bootstrapped by the WildFly Swarm container when we launch it.
 
 ```
 public static void main(String[] args) throws Exception {
-	Swarm swarm = new Swarm();
+	Container container = new Container();
+    container.fraction(new JolokiaFraction("/jmx"));
+    container.start();
 
-	// Camel Fraction
-	swarm.fraction(new CamelCoreFraction()
-	        .addRouteBuilder(new RestService()));
+    WARArchive deployment = ShrinkWrap.create(WARArchive.class);
+    deployment.addPackage("io.fabric8.quickstarts.swarm.route");
+    deployment.staticContent();
+
+    container.deploy(deployment);
 ```
 
 ## Build

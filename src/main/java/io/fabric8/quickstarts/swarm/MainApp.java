@@ -16,8 +16,6 @@
 package io.fabric8.quickstarts.swarm;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.impl.base.spec.WebArchiveImpl;
 import org.wildfly.swarm.container.Container;
 import org.wildfly.swarm.jolokia.JolokiaFraction;
 import org.wildfly.swarm.undertow.WARArchive;
@@ -25,6 +23,15 @@ import org.wildfly.swarm.undertow.WARArchive;
 public class MainApp {
 
 	public static void main(String[] args) throws Exception {
-		new Container().fraction(new JolokiaFraction("/jmx")).start(true).deploy();
+
+		Container container = new Container();
+		container.fraction(new JolokiaFraction("/jmx"));
+		container.start();
+
+		WARArchive deployment = ShrinkWrap.create(WARArchive.class);
+		deployment.addPackage("io.fabric8.quickstarts.swarm.route");
+		deployment.staticContent();
+
+		container.deploy(deployment);
 	}
 }
