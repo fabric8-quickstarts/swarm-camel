@@ -56,7 +56,7 @@
 
         <camel.version>2.17.2</camel.version>
         <docker.maven.plugin.version>0.15.9</docker.maven.plugin.version>
-        <fabric8.version>2.2.144</fabric8.version>
+        <fabric8.version>2.2.145</fabric8.version>
         <wildfly-swarm.version>1.0.0.Final</wildfly-swarm.version>
     </properties>
 
