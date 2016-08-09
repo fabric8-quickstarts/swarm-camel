@@ -73,13 +73,13 @@ curl -X GET http://localhost:8080/jmx
 curl -d "{\"type\":\"read\",\"mbean\":\"java.lang:type=Memory\",\"attribute\":\"HeapMemoryUsage\",\"path\":\"used\"}" http://localhost:8080/jmx/ && echo ""
 ```
 
-## Running the example in fabric8
+## Running the example in Kubernetes
 
 It is assumed a Kubernetes platform is already running with or without OpenShift. If not, you can find details how to [get started](http://fabric8.io/guide/getStarted/index.html).
 
 The example can be built and deployed using a single goal:
 
-    mvn -Pf8-local-deploy
+    mvn fabric8:run
 
 When the example runs in fabric8, you can use the OpenShift client tool to inspect the status
 
