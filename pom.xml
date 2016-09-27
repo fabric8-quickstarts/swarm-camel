@@ -64,7 +64,7 @@
         <wildfly-swarm.version>1.0.0.Final</wildfly-swarm.version>
 
         <!-- maven plugins -->
-        <fabric8.maven.plugin.version>3.1.52</fabric8.maven.plugin.version>
+        <fabric8.maven.plugin.version>3.1.53</fabric8.maven.plugin.version>
     </properties>
 
     <dependencyManagement>
