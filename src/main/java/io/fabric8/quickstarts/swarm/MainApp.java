@@ -16,22 +16,19 @@
 package io.fabric8.quickstarts.swarm;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.wildfly.swarm.container.Container;
-import org.wildfly.swarm.jolokia.JolokiaFraction;
+import org.wildfly.swarm.Swarm;
 import org.wildfly.swarm.undertow.WARArchive;
 
 public class MainApp {
 
 	public static void main(String[] args) throws Exception {
-
-		Container container = new Container();
-		container.fraction(new JolokiaFraction("/jmx"));
-		container.start();
+		Swarm swarm = new Swarm();
+		swarm.start();
 
 		WARArchive deployment = ShrinkWrap.create(WARArchive.class);
 		deployment.addPackage("io.fabric8.quickstarts.swarm.route");
 		deployment.staticContent();
 
-		container.deploy(deployment);
+		swarm.deploy(deployment);
 	}
 }

@@ -44,7 +44,7 @@ public class RestService extends RouteBuilder {
         rest("/service").description("Api rest service").consumes("application/json").produces("application/json")
 
            .get("/say/{name}").description("Say Hello to the name")
-                .param().name("id").type(path).description("The namr of the user to say Hello").dataType("string").endParam()
+                .param().name("id").type(path).description("The name of the user to say Hello").dataType("string").endParam()
                 .to("direct:say");
 
         from("direct:say")
