@@ -124,9 +124,13 @@
         <artifactId>fabric8-maven-plugin</artifactId>
         <version>${fabric8.maven.plugin.version}</version>
         <configuration>
-          <customizer>
-            <java.app.mainClass>io.fabric8.quickstarts.swarm.MainApp</java.app.mainClass>
-          </customizer>
+          <generator>
+            <config>
+              <wildfly-swarm>
+                <mainClass>io.fabric8.quickstarts.swarm.MainApp</mainClass>
+              </wildfly-swarm>
+            </config>
+          </generator>
         </configuration>
         <executions>
           <execution>
