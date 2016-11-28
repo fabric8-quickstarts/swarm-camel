@@ -115,7 +115,6 @@
           </execution>
         </executions>
         <configuration>
-          <debug>${debug.port}</debug>
           <mainClass>io.fabric8.quickstarts.swarm.MainApp</mainClass>
         </configuration>
       </plugin>
@@ -143,14 +142,5 @@
       </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>debug</id>
-      <properties>
-        <debug.port>5555</debug.port>
-      </properties>
-    </profile>
-  </profiles>
 
 </project>
