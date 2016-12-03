@@ -31,12 +31,12 @@
 
     <camel.version>2.18.1</camel.version>
     <fabric8.version>2.2.182</fabric8.version>
-    <wildfly-swarm.version>2016.11.0</wildfly-swarm.version>
+    <wildfly-swarm.version>2016.12.0</wildfly-swarm.version>
     <javaee-api.version>7.0</javaee-api.version>
     <jboss-jaxrs-api_2.0_spec.version>1.0.0.Final</jboss-jaxrs-api_2.0_spec.version>
 
     <!-- maven plugins -->
-    <fabric8.maven.plugin.version>3.2.7</fabric8.maven.plugin.version>
+    <fabric8.maven.plugin.version>3.2.8</fabric8.maven.plugin.version>
   </properties>
 
   <dependencyManagement>
