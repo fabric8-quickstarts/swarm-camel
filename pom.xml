@@ -36,7 +36,7 @@
     <jboss-jaxrs-api_2.0_spec.version>1.0.0.Final</jboss-jaxrs-api_2.0_spec.version>
 
     <!-- maven plugins -->
-    <fabric8.maven.plugin.version>3.5.15</fabric8.maven.plugin.version>
+    <fabric8.maven.plugin.version>3.5.17</fabric8.maven.plugin.version>
   </properties>
 
   <dependencyManagement>
